@@ -33,6 +33,7 @@ License:        GPL v2 or later
 Group:          Development/Tools/Debuggers
 Url:            http://sysprof.com/
 Source:         sysprof-%version.tar.bz2
+Source1001: 	sysprof.manifest
 Recommends:     sysprof-cli
 
 %description
@@ -47,6 +48,7 @@ This package contains the command-line data-collection part only.
 
 %prep
 %setup -q -n sysprof-%version
+cp %{SOURCE1001} .
 
 %build
 NOCONFIGURE=1 ./autogen.sh
@@ -74,6 +76,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %if 0%{?enable_gui}
 %files
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %license COPYING
 %{_bindir}/sysprof
@@ -84,6 +87,7 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %files cli
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %license COPYING
 %{_bindir}/sysprof-cli
